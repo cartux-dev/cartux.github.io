@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARTUX - Premium Tea Kiosk in Kakanad</title>
+    <style>
+        /* Variables */
+        :root {
+            --primary-color: #f39c12;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #1a1a1a;
+            --tea-brown: #8B4513;
+            --tea-amber: #d35400;
+            --transition-speed: 0.4s;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Global Styles */
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        section {
+            padding: 5rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+            color: var(--secondary-color);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            transform: translateX(-50%);
+            transition: width 0.5s;
+        }
+
+        .section-title:hover::after {
+            width: 150px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-speed);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: skewX(-30deg);
+            transition: all 0.6s;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Animated Background Pattern */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.05;
+        }
+
+        .tea-leaves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            overflow: hidden;
+        }
+
+        .tea-leaf {
+            position: absolute;
+            width: 40px;
+            height: 15px;
+            background-color: var(--tea-brown);
+            border-radius: 50% 50% 0 50%;
+            opacity: 0.3;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(100px, 100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+        }
+
+        header.scrolled {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 0.7rem 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animated logo with CSS */
+        .tea-cup {
+            position: relative;
+            display: inline-block;
+            width: 1.2em;
+            height: 1.2em;
+            margin: 0 0.1em;
+            border-radius: 0 0 50% 50%;
+            background: var(--primary-color);
+            overflow: hidden;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .tea-cup::before {
+            content: "";
+            position: absolute;
+            top: 0.2em;
+            right: -0.3em;
+            width: 0.4em;
+            height: 0.4em;
+            border: 0.1em solid var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .tea-cup::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background-color: var(--tea-amber);
+            border-radius: 0 0 40% 40%;
+            animation: tea-wave 2s infinite ease-in-out;
+        }
+
+        @keyframes tea-wave {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(5%);
+            }
+        }
+
+        .steam {
+            position: absolute;
+            top: -15px;
+            left: 30%;
+            width: 8px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: steam 2s infinite;
+        }
+
+        .steam:nth-child(2) {
+            left: 50%;
+            animation-delay: 0.4s;
+        }
+
+        .steam:nth-child(3) {
+            left: 70%;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes steam {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-20px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-color: var(--secondary-color);
+            color: white;
+            overflow: hidden;
+            padding-top: 80px; /* For fixed header */
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 25% 25%, var(--primary-color) 0.5%, transparent 1.5%),
+                radial-gradient(circle at 75% 75%, var(--primary-color) 0.5%, transparent 1.5%),
+                radial-gradient(circle at 50% 50%, var(--tea-amber) 0.5%, transparent 1.5%);
+            background-size: 60px 60px;
+            opacity: 0.2;
+            animation: pattern-shift 20s linear infinite;
+        }
+
+        @keyframes pattern-shift {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 60px 60px;
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+            animation: fade-in-up 1s ease-out;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cup {
+            position: absolute;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background-color: var(--tea-brown);
+            border-radius: 50% 50% 0 0;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+
+        .hero-cup::before {
+            content: "";
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            right: 50px;
+            bottom: 0;
+            background-color: var(--tea-amber);
+            border-radius: 50% 50% 0 0;
+        }
+
+        /* Features */
+        .features {
+            background-color: white;
+            position: relative;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: var(--light-color);
+            transition: all var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: var(--primary-color);
+            opacity: 0.1;
+            transition: height var(--transition-speed);
+            z-index: -1;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature:hover::before {
+            height: 100%;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .feature-icon::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: translateX(-50%);
+            transition: width var(--transition-speed);
+        }
+
+        .feature:hover .feature-icon::after {
+            width: 60px;
+        }
+
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed);
+        }
+
+        .feature:hover h3 {
+            color: var(--primary-color);
+        }
+
+        /* Feature Icons with CSS */
+        .icon-quality {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+        }
+
+        .icon-quality::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            transform: translate(-50%, -50%);
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .icon-quality::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .icon-quick {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+        }
+
+        .icon-quick::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            transform: translate(-50%, -50%);
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .icon-quick-hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transform-origin: 0 50%;
+            animation: clock-hand 8s linear infinite;
+        }
+
+        .icon-quick-hand::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 3px 0 3px 6px;
+            border-color: transparent transparent transparent var(--primary-color);
+        }
+
+        @keyframes clock-hand {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .icon-variety {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+        }
+
+        .tea-leaf-icon {
+            position: absolute;
+            width: 15px;
+            height: 25px;
+            background-color: var(--primary-color);
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(45deg);
+            animation: leaf-pulse 3s infinite;
+        }
+
+        .tea-leaf-icon:nth-child(1) {
+            top: 10px;
+            left: 20px;
+            animation-delay: 0s;
+        }
+
+        .tea-leaf-icon:nth-child(2) {
+            top: 30px;
+            left: 10px;
+            animation-delay: 0.5s;
+        }
+
+        .tea-leaf-icon:nth-child(3) {
+            top: 30px;
+            left: 35px;
+            animation-delay: 1s;
+        }
+
+        @keyframes leaf-pulse {
+            0%, 100% {
+                transform: rotate(45deg) scale(1);
+            }
+            50% {
+                transform: rotate(45deg) scale(1.1);
+            }
+        }
+
+        /* Menu */
+        .menu {
+            background-color: var(--light-color);
+            position: relative;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed);
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item-img {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-tea-cup {
+            position: relative;
+            width: 100px;
+            height: 80px;
+            background-color: var(--tea-brown);
+            border-radius: 0 0 50% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: perspective(500px) rotateX(30deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+        }
+
+        .menu-item:hover .menu-tea-cup {
+            transform: perspective(500px) rotateX(10deg) scale(1.1);
+        }
+
+        .menu-tea-liquid {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 0;
+            border-radius: 0 0 40% 40%;
+            overflow: hidden;
+        }
+
+        .masala-chai .menu-tea-liquid {
+            background-color: #A0522D;
+        }
+
+        .kerala-special .menu-tea-liquid {
+            background-color: #CD853F;
+        }
+
+        .green-tea .menu-tea-liquid {
+            background-color: #90EE90;
+        }
+
+        .lemon-tea .menu-tea-liquid {
+            background-color: #FFFF99;
+        }
+
+        .ginger-tea .menu-tea-liquid {
+            background-color: #DEB887;
+        }
+
+        .herbal-tea .menu-tea-liquid {
+            background-color: #9370DB;
+        }
+
+        .menu-tea-handle {
+            position: absolute;
+            top: 20px;
+            right: -20px;
+            width: 20px;
+            height: 30px;
+            border: 5px solid var(--tea-brown);
+            border-left: none;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .menu-tea-steam {
+            position: absolute;
+            top: -20px;
+            left: 30%;
+            width: 8px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: steam 3s infinite;
+        }
+
+        .menu-tea-steam:nth-child(2) {
+            left: 50%;
+            animation-delay: 0.6s;
+        }
+
+        .menu-tea-steam:nth-child(3) {
+            left: 70%;
+            animation-delay: 1.2s;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed);
+        }
+
+        .menu-item:hover h3 {
+            color: var(--primary-color);
+        }
+
+        .menu-item p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            display: inline-block;
+            position: relative;
+        }
+
+        .price::before {
+            content: "₹";
+            font-size: 0.8rem;
+            position: relative;
+            top: -5px;
+            left: -2px;
+        }
+
+        /* About */
+        .about {
+            background-color: white;
+            position: relative;
+        }
+
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .logo-stylized {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        .logo-text-stylized {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-tea-cup {
+            position: relative;
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            margin: 0 0.1em;
+            border-radius: 0 0 50% 50%;
+            background: var(--primary-color);
+            overflow: hidden;
+            vertical-align: middle;
+        }
+
+        .logo-tea-cup::before {
+            content: "";
+            position: absolute;
+            top: 0.3em;
+            right: -0.4em;
+            width: 0.5em;
+            height: 0.5em;
+            border: 0.1em solid var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .logo-tea-cup::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background-color: var(--tea-amber);
+            border-radius: 0 0 40% 40%;
+            animation: tea-wave 2s infinite ease-in-out;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 2rem;
+        }
+
+        .about-content h2 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-content h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+        }
+
+        .about-content h2:hover::after {
+            width: 100%;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Location */
+        .location {
+            background-color: var(--light-color);
+            position: relative;
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background-color: #e6e6e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--secondary-color);
+        }
+
+        .map-placeholder {
+            width: 100px;
+            height: 100px;
+            background-color: var(--secondary-color);
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(45deg);
+            position: relative;
+            margin-bottom: 20px;
+            animation: map-pulse 2s infinite;
+        }
+
+        @keyframes map-pulse {
+            0%, 100% {
+                transform: rotate(45deg) scale(1);
+            }
+            50% {
+                transform: rotate(45deg) scale(1.1);
+            }
+        }
+
+        .map-placeholder::after {
+            content: "";
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            width: 40%;
+            height: 40%;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .map-address {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .map-address span {
+            display: block;
+            font-weight: normal;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Contact */
+        .contact {
+            background-color: white;
+            position: relative;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 2rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-info h3::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+        }
+
+        .contact-info h3:hover::after {
+            width: 100%;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+            transition: all var(--transition-speed);
+        }
+
+        .contact-detail:hover .contact-icon {
+            transform: scale(1.1) rotate(10deg);
+            background-color: var(--secondary-color);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            color: #777;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all var(--transition-speed);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+            transition: all var(--transition-speed);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.2);
+        }
+
+        .form-control:focus + label,
+        .form-control:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.8rem;
+            padding: 0 5px;
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            align-self: flex-start;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: skewX(-30deg);
+            transition: all 0.6s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 1rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, var(--dark-color) 1%, transparent 3%);
+            background-size: 40px 40px;
+            opacity: 0.3;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+        }
+
+        .footer-section h3:hover::after {
+            width: 100%;
+        }
+
+        .footer-section p {
+            margin-bottom: 1.5rem;
+            color: #aaa;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-section ul li a::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 20px;
+        }
+
+        .footer-section ul li a:hover::before {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            color: white;
+            font-size: 1.2rem;
+            transition: all var(--transition-speed);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            color: #aaa;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copyright a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Floating Cup Animation */
+        .floating-cup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+            transform: translateY(100px);
+            opacity: 0;
+        }
+
+        .floating-cup.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .floating-cup:hover {
+            transform: translateY(-5px) rotate(10deg);
+            background-color: var(--secondary-color);
+        }
+
+        .floating-cup-icon {
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .floating-cup-icon::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 15px;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .floating-cup-icon::after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border: 2px solid white;
+            border-radius: 50%;
+            border-left: none;
+        }
+
+        /* Animations for scroll reveal */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ingredients animation */
+        .ingredients {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ingredient {
+            position: absolute;
+            opacity: 0;
+            animation: float-ingredient 10s ease-in-out infinite;
+        }
+
+        @keyframes float-ingredient {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate-deg));
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark-color);
+                transition: left var(--transition-speed);
+                z-index: 999;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-container {
+                flex-direction: column;
+            }
+
+            .about-content {
+                padding: 2rem 0;
+            }
+
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .features-container, .menu-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container logo-container">
+            <a href="#" class="logo">
+                <span class="logo-text">CART</span>
+                <span class="tea-cup">
+                    <span class="steam"></span>
+                    <span class="steam"></span>
+                    <span class="steam"></span>
+                </span>
+                <span class="logo-text">X</span>
+            </a>
+            <button class="hamburger" id="hamburger">☰</button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-pattern"></div>
+        <div class="animated-bg">
+            <div class="tea-leaves" id="teaLeaves"></div>
+        </div>
+        <div class="hero-cup"></div>
+        <div class="hero-content">
+            <h1>Experience Premium Tea at CARTUX</h1>
+            <p>Welcome to Kakanad's finest tea kiosk, offering a delightful selection of premium teas and refreshments.</p>
+            <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="animated-bg"></div>
+        <div class="container">
+            <h2 class="section-title fade-in">Why Choose Us</h2>
+            <div class="features-container">
+                <div class="feature fade-in">
+                    <div class="icon-quality">
+                        <div class="feature-icon"></div>
+                    </div>
+                    <h3>Premium Quality</h3>
+                    <p>We source the finest tea leaves and ingredients to ensure each cup delivers exceptional flavor and aroma that delights your senses.</p>
+                </div>
+
+                <div class="feature fade-in">
+                    <div class="icon-quick">
+                        <div class="icon-quick-hand"></div>
+                    </div>
+                    <h3>Quick Service</h3>
+                    <p>Our efficient team ensures minimal waiting time without compromising on quality, perfect for busy professionals on the go.</p>
+                </div>
+
+                <div class="feature fade-in">
+                    <div class="icon-variety">
+                        <div class="tea-leaf-icon"></div>
+                        <div class="tea-leaf-icon"></div>
+                        <div class="tea-leaf-icon"></div>
+                    </div>
+                    <h3>Variety of Options</h3>
+                    <p>From traditional chai to exotic blends, we offer a wide range of tea options to suit every palate and preference.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu">
+        <div class="ingredients" id="ingredients"></div>
+        <div class="container">
+            <h2 class="section-title fade-in">Our Menu</h2>
+            <div class="menu-container">
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">
+                        <div class="menu-tea-cup masala-chai">
+                            <div class="menu-tea-liquid"></div>
+                            <div class="menu-tea-handle"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                        </div>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Masala Chai</h3>
+                        <p>Traditional Indian spiced tea with ginger, cardamom, cinnamon, and cloves.</p>
+                        <p class="price">20</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">
+                        <div class="menu-tea-cup kerala-special">
+                            <div class="menu-tea-liquid"></div>
+                            <div class="menu-tea-handle"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                        </div>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Kerala Special Tea</h3>
+                        <p>A local favorite with unique Kerala spices and premium tea leaves.</p>
+                        <p class="price">25</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">
+                        <div class="menu-tea-cup green-tea">
+                            <div class="menu-tea-liquid"></div>
+                            <div class="menu-tea-handle"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                        </div>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Green Tea</h3>
+                        <p>Refreshing and healthy green tea with natural antioxidants.</p>
+                        <p class="price">30</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">
+                        <div class="menu-tea-cup lemon-tea">
+                            <div class="menu-tea-liquid"></div>
+                            <div class="menu-tea-handle"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                        </div>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Lemon Tea</h3>
+                        <p>Tangy and refreshing tea with fresh lemon juice and a hint of honey.</p>
+                        <p class="price">25</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">
+                        <div class="menu-tea-cup ginger-tea">
+                            <div class="menu-tea-liquid"></div>
+                            <div class="menu-tea-handle"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                        </div>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Ginger Tea</h3>
+                        <p>Strong and aromatic tea with fresh ginger, perfect for cold weather.</p>
+                        <p class="price">25</p>
+                    </div>
+                </div>
+
+                <div class="menu-item fade-in">
+                    <div class="menu-item-img">
+                        <div class="menu-tea-cup herbal-tea">
+                            <div class="menu-tea-liquid"></div>
+                            <div class="menu-tea-handle"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                            <div class="menu-tea-steam"></div>
+                        </div>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Herbal Tea</h3>
+                        <p>Caffeine-free blend of herbs and spices for a soothing experience.</p>
+                        <p class="price">35</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About CARTUX</h2>
+            <div class="about-container">
+                <div class="about-image fade-in">
+                    <div class="logo-stylized">
+                        <span class="logo-text-stylized">CART</span>
+                        <span class="logo-tea-cup">
+                            <span class="steam"></span>
+                            <span class="steam"></span>
+                            <span class="steam"></span>
+                        </span>
+                        <span class="logo-text-stylized">X</span>
+                    </div>
+                </div>
+                <div class="about-content fade-in">
+                    <h2>Our Story</h2>
+                    <p>CARTUX began as a small tea kiosk in Kakanad, Ernakulam, with a vision to serve premium quality tea to busy professionals and locals alike. Our passion for tea and commitment to quality has made us a favorite spot for tea lovers.</p>
+                    <p>We're proud of our Kerala roots and incorporate local flavors and traditions into our offerings. As we grow, we remain committed to providing the best tea experience at affordable prices.</p>
+                    <p>Our future plans include expanding into e-commerce to bring our premium tea products to customers across India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="location">
+        <div class="container">
+            <h2 class="section-title fade-in">Find Us</h2>
+            <div class="map-container fade-in">
+                <div class="map-placeholder"></div>
+                <div class="map-address">
+                    CARTUX Tea Kiosk
+                    <span>Kakanad, Ernakulam, Kerala, India</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h3>Get In Touch</h3>
+                    <p>We'd love to hear from you! Reach out to us with any questions, feedback, or business inquiries.</p>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Address:</strong><br>
+                            Kakanad, Ernakulam, Kerala, India
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <strong>Phone:</strong><br>
+                            +91 XXXXXXXXXX
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <strong>Email:</strong><br>
+                            info@cartux.com
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <strong>Hours:</strong><br>
+                            Monday to Saturday, 7:00 AM - 9:00 PM
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder=" " required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder=" " required>
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" id="phone" placeholder=" ">
+                            <label for="phone">Your Phone</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="message" placeholder=" " required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-pattern"></div>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>CARTUX</h3>
+                <p>Premium tea kiosk serving quality brews in Kakanad, Ernakulam, Kerala.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Opening Hours</h3>
+                <ul>
+                    <li>Monday - Friday: 7:00 AM - 9:00 PM</li>
+                    <li>Saturday: 8:00 AM - 9:00 PM</li>
+                    <li>Sunday: 8:00 AM - 8:00 PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 CARTUX. All Rights Reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <div class="floating-cup" id="floatingCup">
+        <div class="floating-cup-icon"></div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            hamburger.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    hamburger.textContent = '☰';
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Create floating tea leaves
+        function createTeaLeaves() {
+            const teaLeaves = document.getElementById('teaLeaves');
+            const numberOfLeaves = 20;
+
+            for (let i = 0; i < numberOfLeaves; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('tea-leaf');
+
+                // Random positioning
+                const randomX = Math.floor(Math.random() * 100);
+                const randomY = Math.floor(Math.random() * 100);
+                const randomRotation = Math.floor(Math.random() * 360);
+                const randomScale = 0.5 + Math.random();
+                const randomDelay = Math.random() * 15;
+                const randomDuration = 10 + Math.random() * 20;
+
+                leaf.style.left = `${randomX}%`;
+                leaf.style.top = `${randomY}%`;
+                leaf.style.transform = `rotate(${randomRotation}deg) scale(${randomScale})`;
+                leaf.style.animationDelay = `${randomDelay}s`;
+                leaf.style.animationDuration = `${randomDuration}s`;
+
+                teaLeaves.appendChild(leaf);
+            }
+        }
+
+        // Create floating ingredients
+        function createIngredients() {
+            const ingredients = document.getElementById('ingredients');
+            const spices = [
+                { name: 'Cardamom', color: '#006400', size: '15px' },
+                { name: 'Cinnamon', color: '#8B4513', size: '20px' },
+                { name: 'Clove', color: '#800000', size: '10px' },
+                { name: 'Ginger', color: '#F4A460', size: '18px' },
+                { name: 'Lemon', color: '#FFD700', size: '22px' },
+                { name: 'Tea Leaf', color: '#2E8B57', size: '15px' }
+            ];
+
+            for (let i = 0; i < 15; i++) {
+                const randomSpice = spices[Math.floor(Math.random() * spices.length)];
+                const ingredient = document.createElement('div');
+                ingredient.classList.add('ingredient');
+
+                // Create spice shape
+                let shape;
+                switch (randomSpice.name) {
+                    case 'Cardamom':
+                        shape = 'oval';
+                        break;
+                    case 'Cinnamon':
+                        shape = 'rectangle';
+                        break;
+                    case 'Clove':
+                        shape = 'circle';
+                        break;
+                    case 'Ginger':
+                        shape = 'irregular';
+                        break;
+                    case 'Lemon':
+                        shape = 'circle';
+                        break;
+                    case 'Tea Leaf':
+                        shape = 'leaf';
+                        break;
+                    default:
+                        shape = 'circle';
+                }
+
+                // Style based on shape
+                ingredient.style.width = randomSpice.size;
+                ingredient.style.height = shape === 'rectangle' ? `${parseInt(randomSpice.size) / 2}px` : randomSpice.size;
+                ingredient.style.backgroundColor = randomSpice.color;
+
+                if (shape === 'oval') {
+                    ingredient.style.borderRadius = '50% 25%';
+                } else if (shape === 'circle') {
+                    ingredient.style.borderRadius = '50%';
+                } else if (shape === 'leaf') {
+                    ingredient.style.borderRadius = '50% 50% 0 50%';
+                    ingredient.style.transform = 'rotate(45deg)';
+                } else if (shape === 'irregular') {
+                    ingredient.style.borderRadius = '60% 40% 30% 70%';
+                } else {
+                    ingredient.style.borderRadius = '2px';
+                }
+
+                // Random positioning and animation
+                const randomX = Math.floor(Math.random() * 100);
+                const randomY = Math.floor(Math.random() * 100);
+                const randomMoveX = -50 + Math.random() * 100 + 'px';
+                const randomMoveY = -50 + Math.random() * 100 + 'px';
+                const randomRotate = Math.random() * 360 + 'deg';
+                const randomDelay = Math.random() * 10;
+                const randomDuration = 10 + Math.random() * 20;
+
+                ingredient.style.left = `${randomX}%`;
+                ingredient.style.top = `${randomY}%`;
+                ingredient.style.setProperty('--move-x', randomMoveX);
+                ingredient.style.setProperty('--move-y', randomMoveY);
+                ingredient.style.setProperty('--rotate-deg', randomRotate);
+                ingredient.style.animationDelay = `${randomDelay}s`;
+                ingredient.style.animationDuration = `${randomDuration}s`;
+
+                ingredients.appendChild(ingredient);
+            }
+        }
+
+        // Scroll reveal animation
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.fade-in');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight * 0.8) {
+                    element.classList.add('show');
+                }
+            });
+        }
+
+        // Show/hide floating cup
+        function handleFloatingCup() {
+            const floatingCup = document.getElementById('floatingCup');
+
+            if (window.scrollY > 300) {
+                floatingCup.classList.add('show');
+            } else {
+                floatingCup.classList.remove('show');
+            }
+        }
+
+        // Scroll to top when floating cup is clicked
+        document.getElementById('floatingCup').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            // Here you would normally send the data to a server
+            // For now, we'll just show an alert
+            alert(`Thank you for your message, ${name}! We will get back to you soon.`);
+
+            // Reset form
+            this.reset();
+        });
+
+        // Active nav link updater based on scroll position
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (window.scrollY >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createTeaLeaves();
+            createIngredients();
+            handleScrollAnimation();
+            handleFloatingCup();
+            updateActiveNavLink();
+
+            // Event listeners for scroll
+            window.addEventListener('scroll', function() {
+                handleScrollAnimation();
+                handleFloatingCup();
+                updateActiveNavLink();
+            });
+        });
+    </script>
+</body>
+</html>
